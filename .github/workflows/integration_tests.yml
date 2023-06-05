@@ -1,19 +1,16 @@
 name: Test consuming this action
 on:
-  pull_request:
-    branches: [v1]
-  workflow_run:
-    workflows: ["Docker Publish"]
-    branches: [v1]
-    types:
-      - completed
-
+  push:
+    branches:
+      ["*"]
 jobs:
   test_success:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./
+        with:
+          token: "This is an error"
 
   test_error:
     runs-on: ubuntu-latest
@@ -23,7 +20,7 @@ jobs:
         continue-on-error: true
         uses: ./
         with:
-          error: "This is an error"
+          token: "This is an error"
       - name: Verify failure
         if: steps.test.outputs.error != ''
         run: echo "Failed as expected"
