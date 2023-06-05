@@ -1,8 +1,9 @@
 name: Test consuming this action
 on:
-  push:
-    branches:
-      ["*"]
+  workflow_run:
+    workflows: [Docker Publish]
+    types:
+      - completed
 jobs:
   test_success:
     runs-on: ubuntu-latest
