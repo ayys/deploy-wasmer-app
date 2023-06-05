@@ -31,7 +31,7 @@ outputs:
     description: 'The description of any error that occurred'
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/ayys/deploy-wasmer-app:v1'
+  image: 'docker://ghcr.io/ayys/deploy-wasmer-app:trunk'
   args:
     - ${{ inputs.token }}
     - ${{ inputs.registry }}
