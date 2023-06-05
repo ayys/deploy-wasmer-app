@@ -1,6 +1,11 @@
 name: deploy-wasmer-app
 description: Deploy an app to wasmer.io
 author: Ayush Jha <ayys@duck.com>
+icon: upload-cloud
+branding:
+  icon: 'upload-cloud'
+  color: 'purple'
+
 inputs:
   token:
     description: 'Token to use when publishing the app'
