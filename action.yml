@@ -1,0 +1,35 @@
+name: deploy-wasmer-app
+description: Deploy an app to wasmer.io
+author: Ayush Jha <ayys@duck.com>
+inputs:
+  token:
+    description: 'Token to use when publishing the app'
+    required: true
+  registry:
+    description: 'Name of the registry'
+    required: false
+    default: 'wapm.io'
+  name:
+    description: 'Name of the app in format `namespace/appname`'
+    required: false
+    default: ''
+  strict:
+    description: 'Verify the package is installed and make sure the package-version is explicitly specified in config'
+    required: false
+    default: 'true'
+  config:
+    description: 'File to read the deployment-config from'
+    required: false
+    default: 'deploy.yaml'
+outputs:
+  error:
+    description: 'The description of any error that occurred'
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/ayys/deploy-wasmer-app:v1'
+  args:
+    - ${{ inputs.token }}
+    - ${{ inputs.registry }}
+    - ${{ inputs.name }}
+    - ${{ inputs.strict }}
+    - ${{ inputs.config }}
