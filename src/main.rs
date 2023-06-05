@@ -15,7 +15,7 @@ fn main() {
     if let Ok(output_path) = env::var("GITHUB_OUTPUT") {
         let inputs = get_inputs().expect("Failed to get inputs");
         deploy_wasmer_app(inputs).expect("Deployment failed");
-        write(output_path, format!("I am so cool!")).unwrap();
+        write(output_path, "I am so cool!").unwrap();
         exit(0);
     } else {
         println!("You need to set env variable GITHUB_OUTPUT");
@@ -23,15 +23,14 @@ fn main() {
     }
 }
 
-
 fn get_inputs() -> Result<ActionInputs, &'static str> {
-    let mut args = std::env::args().skip(1);  // Skip the first argument (the program name)
+    let mut args = std::env::args().skip(1); // Skip the first argument (the program name)
 
     let token = args.next().ok_or("Input TOKEN is required")?;
 
     let registry = args.next();
     let name = args.next();
-    let strict = args.next().map(|s| s.parse::<bool>().ok()).flatten();
+    let strict = args.next().and_then(|s| s.parse::<bool>().ok());
     let config = args.next();
 
     Ok(ActionInputs {
