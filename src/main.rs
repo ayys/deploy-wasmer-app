@@ -15,7 +15,7 @@ fn main() {
     if let Ok(output_path) = env::var("GITHUB_OUTPUT") {
         let inputs = get_inputs().expect("Failed to get inputs");
         deploy_wasmer_app(inputs).expect("Deployment failed");
-        write(output_path, "I am so cool!").unwrap();
+        write(output_path, "url=https://hello.wasmer.app").unwrap();
         exit(0);
     } else {
         println!("You need to set env variable GITHUB_OUTPUT");
